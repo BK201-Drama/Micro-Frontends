@@ -107,7 +107,9 @@ module.exports = {
 
 此时初步得到一个可运行的基座：
 
-![基座初步配置成功界面](C:\Users\Drama\source\Micro-Frontends\pic\基座初步配置成功界面.jpg)
+<p>
+<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/png/基座.png" />
+</p>
 
 
 
@@ -361,16 +363,23 @@ export async function unmount () {
 
 - 基座效果展示
 
-![基座](C:\Users\Drama\source\Micro-Frontends\pic\基座.png)
+<p>
+<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/png/基座初步配置成功界面.jpg" />
+</p>
 
 - vue微应用展示
 
-![vue微应用](C:\Users\Drama\source\Micro-Frontends\pic\vue微应用.png)
+<p>
+<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/png/vue微应用.png" />
+</p>
 
 - react微应用展示
 
-![react微应用](C:\Users\Drama\source\Micro-Frontends\pic\react微应用.png)
+<p>
+<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/png/react微应用.png" />
+</p>
 
 
 
 这样，我们就已经将项目分成了两个文件，就可以分别进行开发啦！
+
