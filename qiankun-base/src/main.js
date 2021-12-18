@@ -17,12 +17,18 @@ const apps = [
     name: 'vueApp', // 子应用的名字
     entry: '//localhost:15000', // 子应用的入口，基座可以加载内部的东西，但是子应用必须支持跨域，用fetch
     container:'#vue', // 加载容器
-    activeRule: '/vue' // 激活的路由
+    activeRule: '/vue', // 激活的路由
+    props: {
+      test: 'vue'
+    }
   }, {
     name: 'reactApp',
     entry: '//localhost:3000', // 子应用的入口，基座可以加载内部的东西，但是子应用必须支持跨域，用fetch
     container:'#react',
-    activeRule: '/react'
+    activeRule: '/react',
+    props: {
+      test: 'react'
+    }
   }
 ]
 

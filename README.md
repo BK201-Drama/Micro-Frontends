@@ -91,6 +91,10 @@ new Vue({
 
 
 
+### 基座路由配置为Browser类型路由
+
+
+
 ### 基座添加vue.config.js
 
 ```vue
@@ -169,8 +173,204 @@ new Vue({
 
 #### main.js配置
 
+```js
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+
+// Vue.config.productionTip = false
+
+let instance = null
+function render () {
+  instance = new Vue({
+    router,
+    render: h => h(App)
+  }).$mount('#app');// 这个是挂载到自己的html中，基座拿到挂载后的html插入进基座里面
+}
+
+// 使用webpack运行时publicPath配置【动态加载publicPath】
+if (window.__POWERED_BY_QIANKUN__) {
+  __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
+}
+
+// 设置独立运行微应用【子应用】
+if (!window.__POWERED_BY_QIANKUN__) {
+  render();
+}
+
+
+
+// ---------------------- 子组件协议 -------------------------- //
+
+export async function bootstrap (props) {};
+
+export async function mount (props) {
+  render(props) // 挂载
+}
+
+export async function unmount (props) {
+  instance.$destroy(); // 卸载
+}
+```
+
+
+
+#### router/index.js配置
+
+我们需要配置成Browser类型的路由
+
+```js
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home.vue'
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  }
+]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: '/vue',
+  routes
+})
+
+export default router
+
+```
+
+
+
+#### vue.config.js配置
+
+```js
+module.exports = {
+  devServer: {
+    port:15000,
+    headers:{
+      'Access-Control-Allow-Origin': '*'
+    }
+  },
+  configureWebpack:{
+    output:{
+      library:'vueApp',// 对应了基座的配置名称
+      libraryTarget:'umd'// 打包成umd模块
+    }
+  }
+}
+```
+
 
 
 
 
 ### react子应用配置
+
+#### 重新配置webpack
+
+- 安装插件
+
+  ```js
+  yarn add react-app-rewired --save
+  ```
+
+- 更改package.json文件的script部分
+
+  ```js
+    "scripts": {
+      "start": "react-app-rewired start",
+      "build": "react-app-rewired build",
+      "test": "react-app-rewired test",
+      "eject": "react-app-rewired eject"
+    }
+  ```
+
+- 添加config-overrides.js文件，重写配置文件
+
+  ```js
+  module.exports = {
+    webpack:(config) => {
+      config.output.library = 'reactApp';
+      config.output.libraryTarget = 'umd';
+      config.output.publicPath = 'http://localhost:3000/';
+      return config;
+    },
+    devServer:(configFunction) => {
+      return function (proxy, allowedHost) {
+        const config = configFunction(proxy, allowedHost)
+        config.port = '3000'
+        config.headers = {
+          'Access-Control-Allow-Origin': '*'
+        }
+        return config
+      }
+    }
+  }
+  ```
+
+  
+
+#### 重新书写index.js入口文件
+
+与vue方法几乎一致
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+
+function render () {
+  ReactDOM.render(<App />, document.getElementById('root'));
+}
+
+if (!window.__POWERED_BY_QIANKUN__) {
+  render();
+}
+
+export async function bootstrap () {
+
+}
+
+export async function mount () {
+  render()
+}
+
+export async function unmount () {
+  ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+}
+
+```
+
+
+
+# 效果展示
+
+- 基座效果展示
+
+![基座](C:\Users\Drama\source\Micro-Frontends\pic\基座.png)
+
+- vue微应用展示
+
+![vue微应用](C:\Users\Drama\source\Micro-Frontends\pic\vue微应用.png)
+
+- react微应用展示
+
+![react微应用](C:\Users\Drama\source\Micro-Frontends\pic\react微应用.png)
+
+
+
+这样，我们就已经将项目分成了两个文件，就可以分别进行开发啦！

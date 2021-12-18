@@ -5,7 +5,8 @@ import router from './router'
 // Vue.config.productionTip = false
 
 let instance = null
-function render () {
+function render (props) {
+  console.log(props)
   instance = new Vue({
     router,
     render: h => h(App)
@@ -21,7 +22,6 @@ if (window.__POWERED_BY_QIANKUN__) {
 if (!window.__POWERED_BY_QIANKUN__) {
   render();
 }
-
 
 
 // ---------------------- 子组件协议 -------------------------- //
