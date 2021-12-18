@@ -15,7 +15,7 @@ import { registerMicroApps, start } from 'qiankun'
 const apps = [
   {
     name: 'vueApp', // 子应用的名字
-    entry: '//localhost:10000', // 子应用的入口，基座可以加载内部的东西，但是子应用必须支持跨域，用fetch
+    entry: '//localhost:15000', // 子应用的入口，基座可以加载内部的东西，但是子应用必须支持跨域，用fetch
     container:'#vue', // 加载容器
     activeRule: '/vue' // 激活的路由
   }, {
