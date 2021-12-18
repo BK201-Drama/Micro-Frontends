@@ -108,8 +108,9 @@ module.exports = {
 此时初步得到一个可运行的基座：
 
 <p>
-<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/png/基座.png" />
+<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/pic/基座.png" />
 </p>
+
 
 
 
@@ -364,20 +365,23 @@ export async function unmount () {
 - 基座效果展示
 
 <p>
-<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/png/基座初步配置成功界面.jpg" />
+<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/pic/基座初步配置成功界面.jpg" />
 </p>
+
 
 - vue微应用展示
 
 <p>
-<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/png/vue微应用.png" />
+<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/pic/vue微应用.png" />
 </p>
+
 
 - react微应用展示
 
 <p>
-<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/png/react微应用.png" />
+<img width="95%" src="https://github.com/BK201-Drama/Micro-Frontends/blob/master/pic/react微应用.png" />
 </p>
+
 
 
 
